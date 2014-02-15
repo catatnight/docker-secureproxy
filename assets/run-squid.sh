@@ -21,8 +21,14 @@ request_header_access Server deny all\n\
 #request_header_access User-Agent deny all\n\
 request_header_access WWW-Authenticate deny all\n\
 request_header_access Link deny all\n\
+#cache\n\
+cache deny all\n\
+cache_mem 0\n\
+cache_store_log none\n\
+negative_ttl 0 minutes\n\
+half_closed_clients off\n\
 #logfile\n\
-logfile_rotate 10 \n" 
+logfile_rotate 10\n" 
 
 sed -i "1i $squid_conf" /etc/squid3/squid.conf
 
