@@ -13,6 +13,12 @@
     # Ports
     EXPOSE 8222
     ```
+
+    and ```run-server.sh``` (only if ```shrpx_port``` changed)
+
+    ```Shell
+    docker run -p <NEW_PORT>:<NEW_PORT> -name spdyproxy -d catatnight/spdyproxy
+    ```
 2. save your own ```server.key``` and ```server.crt``` in ```assets/certs/```
 3. run ```build.sh``` and ```run-server.sh``` 
 4. if squid3 is linked to a local docker container running freeradius, just
