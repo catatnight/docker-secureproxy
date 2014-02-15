@@ -10,12 +10,14 @@ RUN apt-get update
 # Start editing
 #install package here for cache
 RUN apt-get -y install supervisor
-RUN apt-get -y install git build-essential \
+RUN apt-get -y install build-essential \
     && apt-get -y install autoconf automake autotools-dev libtool pkg-config zlib1g-dev libcunit1-dev libssl-dev libxml2-dev libevent-dev
-RUN git clone git://github.com/tatsuhiro-t/spdylay.git && cd /spdylay \
-    && autoreconf -i && automake && autoconf && ./configure && make && make install \
-    && rm -rf /spdylay
+RUN apt-get install -y wget && wget --no-check-certificate https://github.com/tatsuhiro-t/spdylay/releases/download/v1.2.3/spdylay-1.2.3.tar.gz \
+    && tar -zxvf spdylay-1.2.3.tar.gz && cd /spdylay-1.2.3 \
+    && autoreconf -i && automake && autoconf && ./configure && make && make install
 RUN apt-get -y install squid3 \
+    && cd /root && wget --no-check-certificate https://github.com/jiehanzheng/squid2radius/archive/v1.0.tar.gz \
+    && tar -zxvf v1.0.tar.gz && mv squid2radius-1.0 squid2radius \
     && apt-get -y install python-pip \
     && pip install argparse pyrad hurry.filesize
 
@@ -26,8 +28,6 @@ ADD assets/certs /root/certs
 ADD assets/run-shrpx.sh /root/run-shrpx.sh
 #squid3
 ADD assets/run-squid.sh /root/run-squid.sh
-#squid2radius
-RUN cd /root && git clone git://github.com/jiehanzheng/squid2radius.git
 #cron
 ADD assets/run-cron.sh /root/run-cron.sh
 #supervisor
