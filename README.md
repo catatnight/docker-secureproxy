@@ -41,6 +41,7 @@
 + accounting information (data transfer) will be sent to a RADIUS server everyday by ```squid2radius```
 
 ## Reference
++ [搭建 Spdy SSL Proxy (二) - 洋白菜的博客](http://blog.chaiyalin.com/2013/07/spdy-ssl-proxy-2.html)
 + [tatsuhiro-t / spdylay](https://github.com/tatsuhiro-t/spdylay)
 + [jiehanzheng / squid2radius](https://github.com/jiehanzheng/squid2radius)
 + [Link Containers - Docker Documentation](http://docs.docker.io/en/latest/use/working_with_links_names/)
