@@ -41,6 +41,5 @@ ENV radius_server  Your Radius Server ip or Address
 ENV radius_radpass Your Radpass
 
 # Ports
-EXPOSE 8222
 
 CMD ["/usr/bin/supervisord"]

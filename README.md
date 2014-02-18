@@ -6,14 +6,10 @@
 
 	```bash
 	# Dockerfile (NO double quotes)
-	...
-	  # Configure
-	  ENV shrpx_port 8222
-	  ENV radius_server  Your Radius Server ip or Address       
-	  ENV radius_radpass Your Radpass
-	  # Ports
-	  EXPOSE 8222
-	...
+	#Configure
+	ENV shrpx_port 8222
+	ENV radius_server  Your Radius Server ip or Address       
+	ENV radius_radpass Your Radpass
 
 	# run-server.sh (only if shrpx_port above changed)
 	docker run -p <NEW_PORT>:<NEW_PORT> -name spdyproxy -d catatnight/spdyproxy
