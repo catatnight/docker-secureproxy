@@ -15,7 +15,7 @@ RUN apt-get -y install build-essential \
 RUN apt-get install -y wget && wget --no-check-certificate https://github.com/tatsuhiro-t/spdylay/releases/download/v1.2.3/spdylay-1.2.3.tar.gz \
     && tar -zxvf spdylay-1.2.3.tar.gz && cd /spdylay-1.2.3 \
     && autoreconf -i && automake && autoconf && ./configure && make && make install
-RUN apt-get -y install squid3 \
+RUN apt-get -y install squid3 ed \
     && cd /root && wget --no-check-certificate https://github.com/jiehanzheng/squid2radius/archive/v1.0.tar.gz \
     && tar -zxvf v1.0.tar.gz && mv squid2radius-1.0 squid2radius \
     && apt-get -y install python-pip \
