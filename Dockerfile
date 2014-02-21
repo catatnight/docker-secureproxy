@@ -16,24 +16,24 @@ RUN apt-get install -y wget && wget --no-check-certificate https://github.com/ta
     && tar -zxvf spdylay-1.2.3.tar.gz && cd /spdylay-1.2.3 \
     && autoreconf -i && automake && autoconf && ./configure && make && make install
 RUN apt-get -y install squid3 ed \
-    && cd /root && wget --no-check-certificate https://github.com/jiehanzheng/squid2radius/archive/v1.0.tar.gz \
+    && cd /opt && wget --no-check-certificate https://github.com/jiehanzheng/squid2radius/archive/v1.0.tar.gz \
     && tar -zxvf v1.0.tar.gz && mv squid2radius-1.0 squid2radius \
     && apt-get -y install python-pip \
     && pip install argparse pyrad hurry.filesize
 
 # Add files
 #certs
-ADD assets/certs /root/certs 
+ADD assets/certs /opt/certs 
 #shrpx
-ADD assets/run-shrpx.sh /root/run-shrpx.sh
+ADD assets/run-shrpx.sh /opt/run-shrpx.sh
 #squid3
-ADD assets/run-squid.sh /root/run-squid.sh
+ADD assets/run-squid.sh /opt/run-squid.sh
 #cron
-ADD assets/run-cron.sh /root/run-cron.sh
+ADD assets/run-cron.sh /opt/run-cron.sh
 #supervisor
 ADD assets/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-RUN chmod 755 /root/*.sh
+RUN chmod 755 /opt/*.sh
 
 # Configure
 ENV shrpx_port 8222
