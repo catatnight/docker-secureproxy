@@ -1,5 +1,19 @@
 #!/bin/bash
-#note: replace $radius_server by $<alias>_PORT_1812_UDP_ADDR if connected with a local docker radius container 
+
+#shrpx
+mkdir /etc/shrpx
+cat > /etc/shrpx/shrpx.conf <<EOF
+frontend=0.0.0.0,$shrpx_port
+backend=127.0.0.1,8000
+private-key-file=/opt/certs/server.key
+certificate-file=/opt/certs/server.crt
+spdy-proxy=yes
+daemon=no
+workers=1
+EOF
+
+#squid3
+#note: replace $radius_server by $<ALIAS>_PORT_1812_UDP_ADDR if connected with a local radius docker container 
 ed -s /etc/squid3/squid.conf <<EOF
 0a
 #port
@@ -34,4 +48,10 @@ logfile_rotate 10
 w
 EOF
 
-/usr/sbin/squid3 -N
+#crontab
+#note: replace $radius_server by $<ALIAS>_PORT_1812_UDP_ADDR if connected with a local radius docker container 
+cat >> /etc/crontab <<EOF
+0 0 * * * root python /opt/squid2radius/squid2radius.py --squid-path /usr/sbin/squid3 /var/log/squid3/access.log $radius_server $radius_radpass &> /dev/null
+1 0 * * * root rm /var/log/squid3/access.log.7 &> /dev/null
+EOF
+

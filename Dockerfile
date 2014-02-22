@@ -22,22 +22,17 @@ RUN apt-get -y install squid3 wget ed \
 # Add files
 #certs
 ADD assets/certs /opt/certs 
-#shrpx
-ADD assets/run-shrpx.sh /opt/run-shrpx.sh
-#squid3
-ADD assets/run-squid.sh /opt/run-squid.sh
-#cron
-ADD assets/run-cron.sh /opt/run-cron.sh
+#shrpx & squid3 & cron
+ADD assets/install.sh /opt/install.sh
+ADD assets/link.sh /opt/link.sh
 #supervisor
 ADD assets/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-RUN chmod 755 /opt/*.sh
-
 # Configure
 ENV shrpx_port 8222
-ENV radius_server  Your Radius Server ip or Address       
+ENV radius_server Your Radius Server ip or Address
 ENV radius_radpass Your Radpass
 
-# Ports
+RUN chmod 755 /opt/*.sh && /opt/install.sh 
 
 CMD ["/usr/bin/supervisord"]

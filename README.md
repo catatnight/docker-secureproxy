@@ -20,12 +20,11 @@
 
 	```bash
 	# run-server.sh
-	docker run -p 8222:8222 -name spdyproxy -d -link <container>:<alias> catatnight/spdyproxy
+	docker run -p 8222:8222 -name spdyproxy -d -link <CONTAINER>:<ALIAS> catatnight/spdyproxy
 
-	# assets/run-squid.sh
-	... /usr/lib/squid3/squid_radius_auth -h $<alias>_PORT_1812_UDP_ADDR -p 1812 ...
+	# assets/link.sh (ALIAS must be capitalized)
+	radius_server_linked=$ALIAS_PORT_1812_UDP_ADDR
 
-	# assets/run-cron.sh (similar to the step above)
 	```
 
 
