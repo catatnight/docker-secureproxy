@@ -55,3 +55,7 @@ cat >> /etc/crontab <<EOF
 1 0 * * * root rm /var/log/squid3/access.log.7 &> /dev/null
 EOF
 
+#timezone
+sudo bash -c "echo $time_zone > /etc/timezone" 
+dpkg-reconfigure -f noninteractive tzdata
+

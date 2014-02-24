@@ -32,6 +32,7 @@ ADD assets/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ENV shrpx_port 8222
 ENV radius_server Your Radius Server ip or Address
 ENV radius_radpass Your Radpass
+ENV time_zone Asia/Shanghai
 
 RUN chmod 755 /opt/*.sh && /opt/install.sh 
 
