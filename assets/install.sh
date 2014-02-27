@@ -43,7 +43,7 @@ cache_store_log none
 negative_ttl 0 minutes
 half_closed_clients off
 #logfile
-logfile_rotate 10 
+logfile_rotate 4 
 .
 w
 EOF
@@ -51,8 +51,8 @@ EOF
 #crontab
 #note: replace $radius_server by $<ALIAS>_PORT_1812_UDP_ADDR if connected with a local radius docker container 
 cat >> /etc/crontab <<EOF
-0 0 * * * root python /opt/squid2radius/squid2radius.py --squid-path /usr/sbin/squid3 /var/log/squid3/access.log $radius_server $radius_radpass &> /dev/null
-1 0 * * * root rm /var/log/squid3/access.log.7 &> /dev/null
+MAILTO=""
+0 0 * * * root python /opt/squid2radius/squid2radius.py --squid-path /usr/sbin/squid3 /var/log/squid3/access.log $radius_server $radius_radpass > /dev/null 2>&1
 EOF
 
 #timezone
