@@ -12,7 +12,7 @@
 	ENV radius_radpass Your Radpass
 
 	# run-server.sh (only if shrpx_port above changed)
-	docker run -p <NEW_PORT>:<NEW_PORT> -name spdyproxy -d catatnight/spdyproxy
+	docker run -p <NEW_PORT>:<NEW_PORT> --name spdyproxy -d catatnight/spdyproxy
 	```
 2. save your own ```server.key``` and ```server.crt``` in ```assets/certs/```
 3. run ```build.sh``` and ```run-server.sh``` 
@@ -20,7 +20,7 @@
 
 	```bash
 	# run-server.sh
-	docker run -p 8222:8222 -name spdyproxy -d -link <CONTAINER>:<ALIAS> catatnight/spdyproxy
+	docker run -p 8222:8222 --name spdyproxy -d --link <CONTAINER>:<ALIAS> catatnight/spdyproxy
 
 	# assets/link.sh (ALIAS must be capitalized)
 	radius_server_linked=$ALIAS_PORT_1812_UDP_ADDR
