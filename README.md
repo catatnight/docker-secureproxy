@@ -1,5 +1,5 @@
 ## Requirement
-+ Docker 0.8+
++ Docker 0.8
 
 ## Usage
 1. configure
@@ -31,7 +31,6 @@
 ## Note
 + proxy (squid3) requires authentication by freeradius
 + accounting information (data transfer) will be sent to a RADIUS server everyday by ```squid2radius```
-+ swap needed since docker 0.10
 
 ## Reference
 + [搭建 Spdy SSL Proxy (二) - 洋白菜的博客](http://blog.chaiyalin.com/2013/07/spdy-ssl-proxy-2.html)
