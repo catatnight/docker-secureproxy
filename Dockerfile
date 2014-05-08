@@ -22,8 +22,7 @@ RUN apt-get -y install squid3 wget ed \
 # Add files
 #certs
 ADD assets/certs /opt/certs 
-#shrpx & squid3 & cron
-ADD assets/install.sh /opt/install.sh
+#squid3
 ADD assets/link.sh /opt/link.sh
 #supervisor
 ADD assets/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
@@ -34,6 +33,8 @@ ENV radius_server Your Radius Server ip or Address
 ENV radius_radpass Your Radpass
 ENV time_zone Asia/Shanghai
 
+# Initialization 
+ADD assets/install.sh /opt/install.sh
 RUN chmod 755 /opt/*.sh && /opt/install.sh 
 
 CMD ["/usr/bin/supervisord"]
