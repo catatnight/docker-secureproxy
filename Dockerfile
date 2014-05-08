@@ -26,7 +26,7 @@ ADD assets/certs /opt/certs
 ADD assets/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Configure
-ENV shrpx_port 8222
+ENV shrpx_port Proxy Port
 ENV radius_server Your Radius Server ip or Address
 ENV radius_radpass Your Radpass
 ENV time_zone Asia/Shanghai
