@@ -13,7 +13,6 @@ workers=1
 EOF
 
 #squid3
-#note: replace $radius_server by $<ALIAS>_PORT_1812_UDP_ADDR if connected with a local radius docker container 
 ed -s /etc/squid3/squid.conf <<EOF
 0a
 #port

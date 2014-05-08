@@ -22,8 +22,6 @@ RUN apt-get -y install squid3 wget ed \
 # Add files
 #certs
 ADD assets/certs /opt/certs 
-#squid3
-ADD assets/link.sh /opt/link.sh
 #supervisor
 ADD assets/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
