@@ -19,7 +19,7 @@ ed -s /etc/squid3/squid.conf <<EOF
 http_port 8000
 #https_port 8222 cert=/root/certs/server.crt key=/root/certs/server.key options=NO_SSLv2
 #authentication
-auth_param basic program /usr/lib/squid3/squid_radius_auth -h $radius_server -p 1812 -w $radius_radpass
+auth_param basic program /usr/lib/squid3/basic_radius_auth -h $radius_server -p 1812 -w $radius_radpass
 auth_param basic children 5
 auth_param basic realm Hi, buddy! How are you today?
 auth_param basic credentialsttl 6 hours
@@ -55,6 +55,6 @@ MAILTO=""
 EOF
 
 #timezone
-sudo bash -c "echo $time_zone > /etc/timezone" 
+bash -c "echo $time_zone > /etc/timezone" 
 dpkg-reconfigure -f noninteractive tzdata
 
