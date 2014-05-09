@@ -35,4 +35,5 @@ ENV time_zone Asia/Shanghai
 ADD assets/install.sh /opt/install.sh
 RUN chmod 755 /opt/*.sh && /opt/install.sh 
 
-CMD ["/usr/bin/supervisord"]
+# Run
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
