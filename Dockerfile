@@ -4,11 +4,11 @@ MAINTAINER Elliott Ye
 # Set noninteractive mode for apt-get
 ENV DEBIAN_FRONTEND noninteractive
 
-# upgrade base system packages
+# Upgrade base system packages
 RUN apt-get update
 
-# Start editing
-#install package here for cache
+### Start editing ###
+# Install package here for cache
 RUN apt-get -y install supervisor
 ADD assets/spdylay_1.2.3.deb /tmp/spdylay.deb
 RUN apt-get -y install libevent-openssl-2.0-5 libevent-2.0-5 \
