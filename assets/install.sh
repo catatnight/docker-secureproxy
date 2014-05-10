@@ -1,12 +1,14 @@
 #!/bin/bash
 
 #shrpx
+server_key=$(ls /opt/certs | grep "\.key")
+server_crt=$(ls /opt/certs | grep "\.crt")
 mkdir /etc/shrpx
 cat > /etc/shrpx/shrpx.conf <<EOF
 frontend=0.0.0.0,$shrpx_port
 backend=127.0.0.1,8000
-private-key-file=/opt/certs/server.key
-certificate-file=/opt/certs/server.crt
+private-key-file=/opt/certs/$server_key
+certificate-file=/opt/certs/$server_crt
 spdy-proxy=yes
 daemon=no
 workers=1

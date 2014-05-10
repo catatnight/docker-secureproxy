@@ -6,11 +6,11 @@
 
 	```bash
 	# Dockerfile (NO double quotes)
-	ENV shrpx_port Proxy Port
+	ENV shrpx_port     Proxy Port
 	ENV radius_server  Your Radius Server ip or Address       
 	ENV radius_radpass Your Radpass
 	```
-2. save your own ```server.key``` and ```server.crt``` in ```assets/certs/```
+2. save your own ```.key``` and ```.crt``` files in ```assets/certs/```
 3. run ```build.sh``` and ```run-server.sh``` 
 
 

@@ -1,1 +1,1 @@
-save your own server.key and server.crt here
+save your own .key and .crt files here
