@@ -26,14 +26,15 @@ ADD assets/certs /opt/certs
 ADD assets/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Configure
-ENV shrpx_port Proxy Port
-ENV radius_server Your Radius Server ip or Address
+ENV shrpx_port     Proxy Port
+ENV radius_server  Your Radius Server ip or Address
 ENV radius_radpass Your Radpass
-ENV time_zone Asia/Shanghai
+ENV time_zone      Asia/Shanghai
 
 # Initialization 
 ADD assets/install.sh /opt/install.sh
-RUN chmod 755 /opt/*.sh && /opt/install.sh 
+RUN chmod 755 /opt/*.sh 
+RUN /opt/install.sh 
 
 # Run
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
