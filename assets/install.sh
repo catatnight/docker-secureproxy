@@ -49,8 +49,7 @@ logfile_rotate 4
 w
 EOF
 
-#crontab
-#note: replace $radius_server by $<ALIAS>_PORT_1812_UDP_ADDR if connected with a local radius docker container 
+#cron
 cat >> /etc/crontab <<EOF
 MAILTO=""
 0 0 * * * root python /opt/squid2radius/squid2radius.py --squid-path /usr/sbin/squid3 /var/log/squid3/access.log $radius_server $radius_radpass > /dev/null 2>&1
@@ -59,4 +58,3 @@ EOF
 #timezone
 bash -c "echo $time_zone > /etc/timezone" 
 dpkg-reconfigure -f noninteractive tzdata
-

@@ -5,13 +5,13 @@
 1. configure
 
 	```bash
-	# Dockerfile (NO double quotes)
+	# edit Dockerfile
 	ENV shrpx_port     Proxy Port
 	ENV radius_server  Your Radius Server ip or Address       
 	ENV radius_radpass Your Radpass
 	```
 2. save your own ```.key``` and ```.crt``` files in ```assets/certs/```
-3. run ```build.sh``` and ```run-server.sh``` 
+2. run ```build.sh``` to build container and then start it by running ```run-server.sh```
 
 
 ## Note
