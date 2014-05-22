@@ -11,7 +11,7 @@ RUN apt-get update
 # Install package here for cache
 RUN apt-get -y install supervisor
 RUN apt-get -y install wget curl build-essential autoconf automake autotools-dev libtool pkg-config zlib1g-dev libcunit1-dev libssl-dev libxml2-dev libevent-dev \
-    && export shrpx_v=$(curl https://api.github.com/repos/tatsuhiro-t/spdylay/releases | grep '[0-9]\.[0-9]\.[0-9]' | head -1 | sed 's/.*\([0-9]\.[0-9]\.[0-9]\).*/\1/') \
+    && export shrpx_v=$(curl https://api.github.com/repos/tatsuhiro-t/spdylay/releases | grep -o '[0-9]\.[0-9]\.[0-9]' | head -1) \
     && cd /tmp/ && wget --no-check-certificate https://github.com/tatsuhiro-t/spdylay/releases/download/v$shrpx_v/spdylay-$shrpx_v.tar.gz \
     && tar -zxvf spdylay-$shrpx_v.tar.gz && cd spdylay-$shrpx_v/ \
     && autoreconf -i && automake && autoconf && ./configure && make && make install
