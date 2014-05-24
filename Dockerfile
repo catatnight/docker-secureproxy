@@ -10,13 +10,15 @@ RUN apt-get update
 ### Start editing ###
 # Install package here for cache
 RUN apt-get -y install supervisor
-ADD assets/spdylay.deb /tmp/spdylay.deb
-RUN apt-get -y install libevent-openssl-2.0-5 libevent-2.0-5 \
-    && dpkg -i /tmp/spdylay.deb
+RUN apt-get -y install wget curl build-essential autoconf automake autotools-dev libtool pkg-config zlib1g-dev libcunit1-dev libssl-dev libxml2-dev libevent-dev \
+    && export shrpx_v=$(curl https://api.github.com/repos/tatsuhiro-t/spdylay/releases | grep -o '[0-9]\.[0-9]\.[0-9]' | head -1) \
+    && cd /tmp/ && wget --no-check-certificate https://github.com/tatsuhiro-t/spdylay/releases/download/v$shrpx_v/spdylay-$shrpx_v.tar.gz \
+    && tar -zxvf spdylay-$shrpx_v.tar.gz && cd spdylay-$shrpx_v/ \
+    && autoreconf -i && automake && autoconf && ./configure && make && make install
 RUN apt-get -y install squid3 wget ed \
     && cd /opt && wget --no-check-certificate https://github.com/jiehanzheng/squid2radius/archive/v1.0.tar.gz \
     && tar -zxvf v1.0.tar.gz && mv squid2radius-1.0 squid2radius \
-    && apt-get -y install --no-install-recommends python-pip && pip install argparse pyrad hurry.filesize
+    && apt-get -y install python-pip && pip install argparse pyrad hurry.filesize
 
 # Add files
 #certs
