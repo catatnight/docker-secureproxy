@@ -11,7 +11,7 @@
 	ENV radius_radpass Your Radpass
 	```
 2. save your own ```.key``` and ```.crt``` files in ```assets/certs/```
-3. run ```build.sh``` to build container and then start it by running ```run-server.sh```
+3. run ```build.sh``` to build container and then start it by running ```run-server.sh``` (execute as root)
 
 
 ## Note
