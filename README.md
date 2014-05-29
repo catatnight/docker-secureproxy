@@ -27,8 +27,14 @@
 	$ sudo ./run-server.sh
 	```
 5. Using a Secure Web Proxy with Chrome by three optional ways
-	1. add command-line argument: ```--proxy-server=https://<your.proxy.domain>:<port>```
-	2. use pac file: ```function FindProxyForURL(url, host) { return "HTTPS <your.proxy.domain>:<port>"; }```
+	1. add command-line argument ```--proxy-server=https://<your.proxy.domain>:<port>```
+	2. proxy auto-config (PAC) file
+
+		```
+		function FindProxyForURL(url, host) { 
+			return "HTTPS <your.proxy.domain>:<port>"; 
+		}
+		```
 	3. chrome extension [falcon proxy](https://chrome.google.com/webstore/detail/falcon-proxy/gchhimlnjdafdlkojbffdkogjhhkdepf) 
 
 
