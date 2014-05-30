@@ -1,12 +1,27 @@
 #!/bin/bash
 
+#supervisor
+cat > /etc/supervisor/conf.d/supervisord.conf <<EOF
+[supervisord]
+nodaemon=true
+
+[program:shrpx]
+command=/usr/local/bin/shrpx
+
+[program:squid3]
+command=/usr/sbin/squid3 -N
+
+[program:cronjob]
+command=/usr/sbin/cron -f
+EOF
+
 #shrpx
 server_key=$(ls /opt/certs | grep "\.key")
 server_crt=$(ls /opt/certs | grep "\.crt")
 mkdir /etc/shrpx
 cat > /etc/shrpx/shrpx.conf <<EOF
 frontend=0.0.0.0,$shrpx_port
-backend=127.0.0.1,8000
+backend=127.0.0.1,3128
 private-key-file=/opt/certs/$server_key
 certificate-file=/opt/certs/$server_crt
 spdy-proxy=yes
@@ -17,9 +32,6 @@ EOF
 #squid3
 ed -s /etc/squid3/squid.conf <<EOF
 0a
-#port
-http_port 8000
-#https_port 8222 cert=/root/certs/server.crt key=/root/certs/server.key options=NO_SSLv2
 #authentication
 auth_param basic program /usr/lib/squid3/basic_radius_auth -h $radius_server -p 1812 -w $radius_radpass
 auth_param basic children 5
