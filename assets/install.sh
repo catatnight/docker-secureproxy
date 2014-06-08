@@ -60,12 +60,22 @@ logfile_rotate 4
 .
 w
 EOF
+if [ "$auth_param" == "ncsa" ]; then
+	touch /etc/squid3/passwd
+	echo $auth_users | tr , \\n > /tmp/passwd
+	while IFS=':' read -r _user _pwd; do
+		htpasswd -b /etc/squid3/passwd $_user $_pwd 
+	done < /tmp/passwd
+	sed -i "s/^auth_param basic program.*/auth_param basic program \/usr\/lib\/squid3\/basic_ncsa_auth \/etc\/squid3\/passwd/" /etc/squid3/squid.conf
+fi
 
 #cron
-cat >> /etc/crontab <<EOF
-MAILTO=""
-0 0 * * * root python /opt/squid2radius/squid2radius.py --squid-path /usr/sbin/squid3 /var/log/squid3/access.log $radius_server $radius_radpass > /dev/null 2>&1
-EOF
+if [ "$auth_param" != "ncsa" ]; then
+	cat >> /etc/crontab <<-EOF
+	MAILTO=""
+	0 0 * * * root python /opt/squid2radius/squid2radius.py --squid-path /usr/sbin/squid3 /var/log/squid3/access.log $radius_server $radius_radpass > /dev/null 2>&1
+	EOF
+fi
 
 #timezone
 bash -c "echo $time_zone > /etc/timezone" 

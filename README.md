@@ -16,8 +16,14 @@
 	$ vim Dockerfile 
 	# edit Dockerfile
 	ENV shrpx_port     Your Proxy Port
-	ENV radius_server  Your Radius Server ip or Address       
+
+	# proxy (squid3) supports authentication by freeradius (default)
+	ENV radius_server  Your Radius Server ip or Address
 	ENV radius_radpass Your Radpass
+
+	# uncomment following lines and set 'user:pwd' pairs to enable squid3 basic authentication
+	ENV auth_param     ncsa
+	ENV auth_users     user1:pwd1,user2:pwd2,...,userN:pwdN
 	```
 3. Save your own ```.key``` and ```.crt``` files in ```assets/certs/```
 4. Build container and then start it as root
@@ -39,7 +45,6 @@
 
 
 ## Note
-+ proxy (squid3) requires authentication by freeradius
 + accounting information (data transfer) will be sent to a RADIUS server everyday by ```squid2radius```
 + swap needed on host machine since docker 0.10 (especially to DigitalOcean user)
 

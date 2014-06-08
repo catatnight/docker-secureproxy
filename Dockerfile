@@ -10,7 +10,7 @@ RUN apt-get update
 ### Start editing ###
 # Install package here for cache
 RUN apt-get -y install supervisor
-RUN apt-get -y install squid3 wget ed \
+RUN apt-get -y install squid3 wget ed apache2-utils \
     && cd /opt && wget --no-check-certificate https://github.com/jiehanzheng/squid2radius/archive/v1.0.tar.gz \
     && tar -zxvf v1.0.tar.gz && mv squid2radius-1.0 squid2radius \
     && apt-get -y install --no-install-recommends python-pip && pip install argparse pyrad hurry.filesize
@@ -26,6 +26,8 @@ ADD assets/certs /opt/certs
 ENV shrpx_port     Your Proxy Port
 ENV radius_server  Your Radius Server ip or Address
 ENV radius_radpass Your Radpass
+#ENV auth_param     ncsa
+#ENV auth_users     user1:pwd1,user2:pwd2,...,userN:pwdN
 ENV time_zone      Asia/Shanghai
 
 # Initialization 
