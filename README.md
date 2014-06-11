@@ -26,11 +26,11 @@
 	ENV auth_users     user1:pwd1,user2:pwd2,...,userN:pwdN
 	```
 3. Save your own ```.key``` and ```.crt``` files in ```assets/certs/```
-4. Build container and then start it as root
+4. Build container and then manage it as root
 	
 	```bash
 	$ sudo ./build.sh
-	$ sudo ./run-server.sh
+	$ sudo ./spdyproxy.py [start|stop|restart]
 	```
 5. Using a Secure Web Proxy with Chrome by three optional ways
 	1. add command-line argument ```--proxy-server=https://<your.proxy.domain>:<port>```
