@@ -30,7 +30,7 @@
 	
 	```bash
 	$ sudo ./build.sh
-	$ sudo ./spdyproxy.py [start|stop|restart]
+	$ sudo ./manage.py [start|stop|restart]
 	```
 5. Using a Secure Web Proxy with Chrome by three optional ways
 	1. add command-line argument ```--proxy-server=https://<your.proxy.domain>:<port>```
