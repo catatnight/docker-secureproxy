@@ -30,7 +30,7 @@
 	
 	```bash
 	$ sudo ./build.sh
-	$ sudo ./manage.py [start|stop|restart]
+	$ sudo ./manage.py [create|start|stop|restart|delete]
 	```
 5. Using a Secure Web Proxy with Chrome by three optional ways
 	1. add command-line argument ```--proxy-server=https://<your.proxy.domain>:<port>```

@@ -5,7 +5,7 @@ import argparse
 
 if __name__=="__main__":
   parser = argparse.ArgumentParser(description='Manage spdyproxy container')
-  parser.add_argument("execute", help="start|stop|restart spdyproxy server")
+  parser.add_argument("execute", choices=['create','start','stop','restart','delete'], help="manage spdyproxy server")
   args = parser.parse_args()
 
   class bcolors:
@@ -16,24 +16,21 @@ if __name__=="__main__":
     FAIL = '\033[91m'
     ENDC = '\033[0m'
 
-  def _start():
-    bashCommand = "docker run --net=host --name spdyproxy -d catatnight/spdyproxy"
-    process = subprocess.Popen(shlex.split(bashCommand), stdout=subprocess.PIPE)
-    if process.stdout.readline() != "":
-      print bcolors.OKGREEN + "Spdyproxy started successfully" + bcolors.ENDC
+  def _execute(signal):
+    signal_dict = {"create" : "docker run --net=host --name spdyproxy -d catatnight/spdyproxy", \
+                   "start"  : "docker start   spdyproxy", \
+                   "stop"   : "docker stop    spdyproxy", \
+                   "restart": "docker restart spdyproxy", \
+                   "delete" : "docker rm -f   spdyproxy"}
+    process = subprocess.Popen(shlex.split(signal_dict[signal]), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    if process.stdout.readline():
+      if signal == "create": signal += " and start"
+      print bcolors.OKGREEN + signal + " spdyproxy successfully" + bcolors.ENDC
+    else:
+      _err = process.stderr.readline()
+      if 'No such container' in _err:
+        print bcolors.WARNING + "Please create spdyproxy container first" + bcolors.ENDC
+      else: print bcolors.WARNING + _err + bcolors.ENDC
     output = process.communicate()[0]
 
-  def _stop():
-    bashCommand = "docker rm -f spdyproxy"
-    process = subprocess.Popen(shlex.split(bashCommand), stdout=subprocess.PIPE)
-    if process.stdout.readline() != "":
-      print bcolors.OKGREEN + "Spdyproxy stopped successfully" + bcolors.ENDC
-    output = process.communicate()[0]
-
-  if args.execute== "start":
-    _start()
-  elif args.execute== "stop":
-    _stop()
-  elif args.execute== "restart":
-    _stop()
-    _start()
+  _execute(args.execute)
