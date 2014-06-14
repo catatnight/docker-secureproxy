@@ -14,7 +14,7 @@ RUN apt-get -y install squid3 wget ed apache2-utils \
     && cd /opt && wget --no-check-certificate https://github.com/jiehanzheng/squid2radius/archive/v1.0.tar.gz \
     && tar -zxvf v1.0.tar.gz && mv squid2radius-1.0 squid2radius \
     && apt-get -y install --no-install-recommends python-pip && pip install argparse pyrad hurry.filesize
-RUN apt-get -y install libevent-openssl-2.0-5 libevent-2.0-5
+RUN apt-get -y install libevent-openssl-2.0-5 libevent-2.0-5 openssl libssl1.0.0
 ADD assets/spdylay.deb /tmp/spdylay.deb
 RUN dpkg -i /tmp/spdylay.deb && ln -s /usr/local/lib/libspdylay.so /lib/x86_64-linux-gnu/libspdylay.so.7
 
