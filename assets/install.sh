@@ -62,7 +62,7 @@ w
 EOF
 if [ "$auth_param" == "ncsa" ]; then
 	touch /etc/squid3/passwd
-	echo $auth_users | tr , \\n > /tmp/passwd
+	echo $ncsa_users | tr , \\n > /tmp/passwd
 	while IFS=':' read -r _user _pwd; do
 		htpasswd -b /etc/squid3/passwd $_user $_pwd 
 	done < /tmp/passwd

@@ -23,11 +23,11 @@ RUN dpkg -i /tmp/spdylay.deb && ln -s /usr/local/lib/libspdylay.so /lib/x86_64-l
 ADD assets/certs /opt/certs 
 
 # Configure
-ENV shrpx_port     Your Proxy Port
-ENV radius_server  Your Radius Server ip or Address
-ENV radius_radpass Your Radpass
-#ENV auth_param     ncsa
-#ENV auth_users     user1:pwd1,user2:pwd2,...,userN:pwdN
+ENV shrpx_port     6789
+ENV auth_param     radius|ncsa
+ENV radius_server  1.2.3.4
+ENV radius_radpass radpass
+ENV ncsa_users     user1:pwd1,user2:pwd2,...,userN:pwdN
 ENV time_zone      Asia/Shanghai
 
 # Initialization 
