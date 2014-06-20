@@ -4,8 +4,10 @@ import shlex, subprocess
 import argparse
 
 if __name__=="__main__":
-  parser = argparse.ArgumentParser(description='Manage spdyproxy container')
-  parser.add_argument("execute", choices=['create','start','stop','restart','delete'], help="manage spdyproxy server")
+  app_name = 'spdyproxy'
+  
+  parser = argparse.ArgumentParser(description='Manage %s container' % app_name)
+  parser.add_argument("execute", choices=['create','start','stop','restart','delete'], help='manage %s server' % app_name)
   args = parser.parse_args()
 
   class bcolors:
@@ -17,19 +19,19 @@ if __name__=="__main__":
     ENDC = '\033[0m'
 
   def _execute(signal):
-    signal_dict = {"create" : "docker run --net=host --name spdyproxy -d catatnight/spdyproxy", \
-                   "start"  : "docker start   spdyproxy", \
-                   "stop"   : "docker stop    spdyproxy", \
-                   "restart": "docker restart spdyproxy", \
-                   "delete" : "docker rm -f   spdyproxy"}
+    signal_dict = {"create" : "docker run --net=host --name {0} -d catatnight/{0}".format(app_name), \
+                   "start"  : "docker start   %s" % app_name, \
+                   "stop"   : "docker stop    %s" % app_name, \
+                   "restart": "docker restart %s" % app_name, \
+                   "delete" : "docker rm -f   %s" % app_name}
     process = subprocess.Popen(shlex.split(signal_dict[signal]), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     if process.stdout.readline():
       if signal == "create": signal += " and start"
-      print bcolors.OKGREEN + signal + " spdyproxy successfully" + bcolors.ENDC
+      print bcolors.OKGREEN + signal + " %s successfully" % app_name + bcolors.ENDC
     else:
       _err = process.stderr.readline()
       if 'No such container' in _err:
-        print bcolors.WARNING + "Please create spdyproxy container first" + bcolors.ENDC
+        print bcolors.WARNING + "Please create %s container first" % app_name + bcolors.ENDC
       else: print bcolors.WARNING + _err + bcolors.ENDC
     output = process.communicate()[0]
 
