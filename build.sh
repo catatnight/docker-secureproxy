@@ -1,12 +1,8 @@
 #!/bin/bash
 
-if [ $(dpkg -l curl >/dev/null 2>&1 && echo -n "installed") != "installed" ]; then
-	apt-get -y install curl
-fi
-
 shrpx_v=$(curl https://api.github.com/repos/tatsuhiro-t/spdylay/releases | grep -o '[0-9]\.[0-9]\.[0-9]' | head -1)
 
-if [ "$(dpkg-deb --field assets/spdylay.deb version)" != "$shrpx_v-1" ]; then
+if [ ! -f assets/spdylay.deb ]; then
 	cd assets/
 	bash -c "cat > Dockerfile" <<-EOF
 	From ubuntu:latest
@@ -20,12 +16,9 @@ if [ "$(dpkg-deb --field assets/spdylay.deb version)" != "$shrpx_v-1" ]; then
 	EOF
 	docker build --no-cache --rm -t spdyproxy-temp .
 	docker run -itd --name spdyproxy-temp spdyproxy-temp tail -f /var/log/dpkg.log
+	docker cp spdyproxy-temp:/tmp/spdylay-$shrpx_v/spdylay_$shrpx_v-1_amd64.deb . && mv spdylay_$shrpx_v-1_amd64.deb spdylay.deb
+	docker rm -f spdyproxy-temp && docker rmi spdyproxy-temp && rm Dockerfile
 	cd ..
-	docker cp spdyproxy-temp:/tmp/spdylay-$shrpx_v/spdylay_$shrpx_v-1_amd64.deb assets/
-	mv assets/spdylay_$shrpx_v-1_amd64.deb assets/spdylay.deb
-	docker rm -f spdyproxy-temp
-	docker rmi spdyproxy-temp
-	rm assets/Dockerfile
 fi
 
 docker build --rm -t catatnight/spdyproxy .
