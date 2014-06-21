@@ -1,5 +1,4 @@
 ## Requirement
-+ curl
 + Docker 0.11
 + SSL certificate issued by Trusted Root Certification Authorities (e.g. [StartSSL.com](https://www.startssl.com))
 + Google Chrome
