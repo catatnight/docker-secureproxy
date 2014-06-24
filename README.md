@@ -7,8 +7,8 @@
 1. Clone the git repo
 	
 	```bash
-	$ git clone https://github.com/catatnight/docker-spdyproxy.git
-	$ cd docker-spdyproxy
+	$ git clone https://github.com/catatnight/docker-sslproxy.git
+	$ cd docker-sslproxy
 	```
 2. Configure
 

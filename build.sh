@@ -3,7 +3,7 @@
 cd assets/
 
 bash -c "cat > Dockerfile" <<-EOF
-From ubuntu:latest
+From ubuntu:trusty
 ADD build-deb.sh /tmp/build-deb.sh
 RUN /tmp/build-deb.sh
 EOF
