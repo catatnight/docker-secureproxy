@@ -16,14 +16,12 @@ command=/usr/sbin/cron -f
 EOF
 
 #shrpx
-server_key=$(ls /opt/certs | grep "\.key")
-server_crt=$(ls /opt/certs | grep "\.crt")
 mkdir /etc/shrpx
 cat > /etc/shrpx/shrpx.conf <<EOF
 frontend=0.0.0.0,$shrpx_port
 backend=127.0.0.1,3128
-private-key-file=/opt/certs/$server_key
-certificate-file=/opt/certs/$server_crt
+private-key-file=$(find /opt/certs -iname *.key)
+certificate-file=$(find /opt/certs -iname *.crt)
 spdy-proxy=yes
 daemon=no
 workers=1

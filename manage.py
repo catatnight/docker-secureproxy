@@ -4,7 +4,7 @@ import shlex, subprocess
 import argparse
 
 if __name__ == '__main__':
-  app_name = 'spdyproxy'
+  app_name = 'sslproxy'
   
   parser = argparse.ArgumentParser(description='Manage %s container' % app_name)
   parser.add_argument("execute", choices=['create','start','stop','restart','delete'], help='manage %s server' % app_name)
