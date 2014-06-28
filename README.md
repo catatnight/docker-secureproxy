@@ -42,6 +42,7 @@
 
 
 ## Note
++ squid3 needs to use port 3128
 + accounting information (data transfer) will be sent to a RADIUS server everyday by ```squid2radius```
 + swap needed on host machine since docker 0.10 (especially to DigitalOcean user)
 
