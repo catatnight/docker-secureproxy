@@ -15,7 +15,7 @@ if [ -f nghttp2.deb ]; then
   sed -i "/From.*/a ADD nghttp2.deb \/tmp\/nghttp2.deb" Dockerfile
 fi
 
-img='sslproxy'
+img='secureproxy'
 docker build --no-cache --rm -t $img-temp .
 docker run -itd --name $img-temp $img-temp tail -f /var/log/dpkg.log
 docker cp $img-temp:/tmp/spdylay.deb . 

@@ -7,8 +7,8 @@
 1. Clone the git repo
 	
 	```bash
-	$ git clone https://github.com/catatnight/docker-sslproxy.git
-	$ cd docker-sslproxy
+	$ git clone https://github.com/catatnight/docker-secureproxy.git
+	$ cd docker-secureproxy
 	```
 2. Configure
 
@@ -47,9 +47,9 @@
 + swap needed on host machine since docker 0.10 (especially to DigitalOcean user)
 
 ## Reference
-+ [搭建 Spdy SSL Proxy (二) - 洋白菜的博客](http://blog.chaiyalin.com/2013/07/spdy-ssl-proxy-2.html)
-+ [tatsuhiro-t / spdylay](https://github.com/tatsuhiro-t/spdylay)
++ [Chrome - Secure Web Proxy](http://www.chromium.org/developers/design-documents/secure-web-proxy)
 + [tatsuhiro-t / nghttp2](https://github.com/tatsuhiro-t/nghttp2)
 + [jiehanzheng / squid2radius](https://github.com/jiehanzheng/squid2radius)
-+ [Chrome - Secure Web Proxy](http://www.chromium.org/developers/design-documents/secure-web-proxy)
++ [tatsuhiro-t / spdylay](https://github.com/tatsuhiro-t/spdylay)
++ [搭建 Spdy SSL Proxy (二) - 洋白菜的博客](http://blog.chaiyalin.com/2013/07/spdy-ssl-proxy-2.html)
 + TBD
