@@ -15,12 +15,13 @@ if [ -f nghttp2.deb ]; then
   sed -i "/From.*/a ADD nghttp2.deb \/tmp\/nghttp2.deb" Dockerfile
 fi
 
-docker build --no-cache --rm -t sslproxy-temp .
-docker run -itd --name sslproxy-temp sslproxy-temp tail -f /var/log/dpkg.log
-docker cp sslproxy-temp:/tmp/spdylay.deb . 
-docker cp sslproxy-temp:/tmp/nghttp2.deb . 
-docker rm -f sslproxy-temp && docker rmi sslproxy-temp && rm Dockerfile
+img='sslproxy'
+docker build --no-cache --rm -t $img-temp .
+docker run -itd --name $img-temp $img-temp tail -f /var/log/dpkg.log
+docker cp $img-temp:/tmp/spdylay.deb . 
+docker cp $img-temp:/tmp/nghttp2.deb . 
+docker rm -f $img-temp && docker rmi $img-temp && rm Dockerfile
 
 cd ..
 
-docker build --rm -t catatnight/sslproxy .
+docker build --rm -t catatnight/$img .
