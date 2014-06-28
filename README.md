@@ -15,7 +15,7 @@
 	```bash
 	$ vim Dockerfile 
 	# edit Dockerfile
-	ENV shrpx_port     6789
+	ENV proxy_port     6789
 	# choose auth method (radius or ncsa[htpasswd]) and set related ENV values
 	ENV auth_param     radius|ncsa
 	ENV radius_server  1.2.3.4
@@ -48,6 +48,7 @@
 ## Reference
 + [搭建 Spdy SSL Proxy (二) - 洋白菜的博客](http://blog.chaiyalin.com/2013/07/spdy-ssl-proxy-2.html)
 + [tatsuhiro-t / spdylay](https://github.com/tatsuhiro-t/spdylay)
++ [tatsuhiro-t / nghttp2](https://github.com/tatsuhiro-t/nghttp2)
 + [jiehanzheng / squid2radius](https://github.com/jiehanzheng/squid2radius)
 + [Chrome - Secure Web Proxy](http://www.chromium.org/developers/design-documents/secure-web-proxy)
 + TBD
