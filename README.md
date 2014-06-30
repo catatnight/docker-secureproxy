@@ -1,5 +1,5 @@
 ## Requirement
-+ Docker 0.11
++ Docker 1.0 & base-image ubuntu:trusty
 + SSL certificate issued by Trusted Root Certification Authorities (e.g. [StartSSL.com](https://www.startssl.com))
 + Google Chrome
 
@@ -30,12 +30,12 @@
 	$ sudo ./manage.py [create|start|stop|restart|delete]
 	```
 5. Using a Secure Web Proxy with Chrome by three optional ways
-	1. add command-line argument ```--proxy-server=https://<your.proxy.domain>:<port>```
+	1. add command-line argument ```--proxy-server=https://<your.proxy.domain>:<proxy_port>```
 	2. proxy auto-config (PAC) file
 
 		```
 		function FindProxyForURL(url, host) { 
-			return "HTTPS <your.proxy.domain>:<port>"; 
+			return "HTTPS <your.proxy.domain>:<proxy_port>"; 
 		}
 		```
 	3. chrome extension [falcon proxy](https://chrome.google.com/webstore/detail/falcon-proxy/gchhimlnjdafdlkojbffdkogjhhkdepf) 
