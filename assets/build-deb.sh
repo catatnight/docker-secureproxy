@@ -9,9 +9,8 @@ def fetch_version(url, app):
 	response = urllib.request.urlopen(url)
 	html = response.read().decode('utf-8')
 	version = re.search('[0-9]\.[0-9]\.[0-9]', html)
-	a_file = open('/{0}'.format(app), mode='w')
-	a_file.write(version.group(0))
-	a_file.close()
+	with open('/{0}'.format(app), mode='w') as a_file:
+		a_file.write(version.group(0))
 
 fetch_version('http://github.com/tatsuhiro-t/nghttp2/releases', 'nghttp2')
 fetch_version('http://github.com/tatsuhiro-t/spdylay/releases', 'shrpx')

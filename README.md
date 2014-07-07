@@ -1,6 +1,6 @@
 ## Requirement
 + Docker 1.0 & base-image ubuntu:trusty
-+ SSL certificate issued by Trusted Root Certification Authorities (e.g. [StartSSL.com](https://www.startssl.com))
++ A domain and an SSL certificate signed by a trusted CA, (e.g. [StartSSL.com](https://www.startssl.com))
 + Google Chrome
 
 ## Usage
