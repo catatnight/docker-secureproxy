@@ -15,14 +15,10 @@ RUN apt-get -y install squid3 wget ed apache2-utils \
     && tar -zxvf v1.0.tar.gz && mv squid2radius-1.0 squid2radius \
     && apt-get -y install --no-install-recommends python-pip && pip install argparse pyrad hurry.filesize
 RUN apt-get -y install libevent-openssl-2.0-5 libevent-2.0-5 libjemalloc-dev openssl libssl1.0.0
-ADD assets/spdylay.deb /tmp/spdylay.deb
-RUN dpkg -i /tmp/spdylay.deb && ln -s /usr/local/lib/libspdylay.so /lib/x86_64-linux-gnu/libspdylay.so.7
-ADD assets/nghttp2.deb /tmp/nghttp2.deb
-RUN dpkg -i /tmp/nghttp2.deb && ln -s /usr/local/lib/libnghttp2.so /lib/x86_64-linux-gnu/libnghttp2.so.3
 
 # Add files
-#certs
-ADD assets/certs /opt/certs 
+ADD assets/ /opt/
+RUN dpkg -i /opt/*.deb && echo "/usr/local/lib" >> /etc/ld.so.conf.d/usr-local.conf && ldconfig
 
 # Configure
 ENV proxy_port     6789
@@ -32,9 +28,9 @@ ENV radius_radpass radpass
 ENV ncsa_users     user1:pwd1,user2:pwd2,...,userN:pwdN
 ENV time_zone      Asia/Shanghai
 
-# Initialization 
+# Initialization
 ADD assets/install.sh /opt/install.sh
-RUN /opt/install.sh 
+RUN /opt/install.sh
 
 # Run
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
