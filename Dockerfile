@@ -21,16 +21,8 @@ ADD assets/ /opt/
 RUN dpkg -i /opt/*.deb && echo "/usr/local/lib" >> /etc/ld.so.conf.d/usr-local.conf && ldconfig
 
 # Configure
-ENV proxy_port     6789
-ENV auth_param     radius|ncsa
-ENV radius_server  1.2.3.4
-ENV radius_radpass radpass
-ENV ncsa_users     user1:pwd1,user2:pwd2,...,userN:pwdN
-ENV time_zone      Asia/Shanghai
 
 # Initialization
-ADD assets/install.sh /opt/install.sh
-RUN /opt/install.sh
 
 # Run
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
+CMD /opt/install.sh;/usr/bin/supervisord -c /etc/supervisor/supervisord.conf

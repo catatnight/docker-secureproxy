@@ -5,40 +5,40 @@
 
 ## Usage
 1. Clone the git repo
-	
+
 	```bash
 	$ git clone https://github.com/catatnight/docker-secureproxy.git
 	$ cd docker-secureproxy
 	```
-2. Configure
+
+2. Save your own ```.key``` and ```.crt``` files in ```certs/```
+3. Build container and then manage it as root
 
 	```bash
-	$ vim Dockerfile 
-	# edit Dockerfile
-	ENV proxy_port     6789
-	# choose auth method (radius or ncsa[htpasswd]) and set related ENV values
-	ENV auth_param     radius|ncsa
-	ENV radius_server  1.2.3.4
-	ENV radius_radpass radpass
-	ENV ncsa_users     user1:pwd1,user2:pwd2,...,userN:pwdN
-	```
-3. Save your own ```.key``` and ```.crt``` files in ```assets/certs/```
-4. Build container and then manage it as root
-	
-	```bash
 	$ sudo ./build.sh
-	$ sudo ./manage.py [create|start|stop|restart|delete]
+
+	$ sudo ./manage.py -h
+	usage: manage.py [-h] [--proxy_port PROXY_PORT]
+				 [--radius_server RADIUS_SERVER]
+				 [--radius_secret RADIUS_SECRET] [--ncsa_users NCSA_USERS]
+				 {create,start,stop,restart,delete}
+	# proxy authentication methods
+	# 1) Uses a RADIUS server for login validation
+	$ sudo ./manage.py create --proxy_port 1234 --radius_server radius.example.com --radius_secret radpass
+	# 2) Uses an NCSA-style username and password file
+	$ sudo ./manage.py create --proxy_port 1234 --ncsa_users user1:pwd1,user2:pwd2
 	```
-5. Using a Secure Web Proxy with Chrome by three optional ways
+
+4. Using a Secure Web Proxy with Chrome by three optional ways
 	1. add command-line argument ```--proxy-server=https://<your.proxy.domain>:<proxy_port>```
 	2. proxy auto-config (PAC) file
 
 		```
-		function FindProxyForURL(url, host) { 
-			return "HTTPS <your.proxy.domain>:<proxy_port>"; 
+		function FindProxyForURL(url, host) {
+			return "HTTPS <your.proxy.domain>:<proxy_port>";
 		}
 		```
-	3. chrome extension [falcon proxy](https://chrome.google.com/webstore/detail/falcon-proxy/gchhimlnjdafdlkojbffdkogjhhkdepf) 
+	3. chrome extension [falcon proxy](https://chrome.google.com/webstore/detail/falcon-proxy/gchhimlnjdafdlkojbffdkogjhhkdepf)
 
 
 ## Note
