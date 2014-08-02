@@ -10,11 +10,6 @@
 	$ docker pull catatnight/secureproxy
 	$ curl https://raw.githubusercontent.com/catatnight/docker-secureproxy/master/manage.py -o manage.py
 	$ chmod +x manage.py
-
-	# OR build on localhost
-	$ git clone https://github.com/catatnight/docker-secureproxy.git
-	$ cd docker-secureproxy
-	$ ./build.sh
 	```
 
 2. Save SSL certs (same directory as where ```manage.py``` is)
