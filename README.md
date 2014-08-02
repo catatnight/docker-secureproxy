@@ -18,8 +18,7 @@
 	$ sudo ./build.sh
 
 	$ sudo ./manage.py -h
-	usage: manage.py [-h] [--proxy_port PROXY_PORT]
-				 [--radius_server RADIUS_SERVER]
+	usage: manage.py [-h] [-p PROXY_PORT] [--radius_server RADIUS_SERVER]
 				 [--radius_secret RADIUS_SECRET] [--ncsa_users NCSA_USERS]
 				 {create,start,stop,restart,delete}
 	# proxy authentication methods
