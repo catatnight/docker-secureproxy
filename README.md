@@ -24,9 +24,9 @@
 				 {create,start,stop,restart,delete}
 	# proxy authentication methods
 	# 1) Uses a RADIUS server for login validation
-	$ sudo ./manage.py create --proxy_port 1234 --radius_server radius.example.com --radius_secret radpass
+	$ sudo ./manage.py create -p 1234 --radius_server radius.example.com --radius_secret radpass
 	# 2) Uses an NCSA-style username and password file
-	$ sudo ./manage.py create --proxy_port 1234 --ncsa_users user1:pwd1,user2:pwd2
+	$ sudo ./manage.py create -p 1234 --ncsa_users user1:pwd1,user2:pwd2
 	```
 
 4. Using a Secure Web Proxy with Chrome by three optional ways

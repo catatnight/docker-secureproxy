@@ -10,7 +10,7 @@ if __name__ == '__main__':
 
   parser = argparse.ArgumentParser(description='Manage %s container' % app_name)
   parser.add_argument("execute", choices=['create','start','stop','restart','delete'], help='manage %s server' % app_name)
-  parser.add_argument("--proxy_port", default="", help="proxy port")
+  parser.add_argument("-p","--proxy_port", default="", help="proxy port")
   parser.add_argument("--radius_server", default="", help="radius server address")
   parser.add_argument("--radius_secret", default="", help="radius server secret")
   parser.add_argument("--ncsa_users", default="", help="ncsa users' credential e.g. user1:pwd1,user2:pwd2")
