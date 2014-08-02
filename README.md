@@ -3,20 +3,31 @@
 + A domain and an SSL certificate signed by a trusted CA, (e.g. [StartSSL.com](https://www.startssl.com))
 + Google Chrome
 
-## Usage
-1. Clone the git repo
+## Installation
+1. Build image
 
 	```bash
+	$ sudo docker pull catatnight/secureproxy
+	$ curl https://raw.githubusercontent.com/catatnight/docker-secureproxy/master/manage.py -o manage.py
+	$ chmod +x manage.py
+
+	# OR build on localhost
 	$ git clone https://github.com/catatnight/docker-secureproxy.git
 	$ cd docker-secureproxy
+	$ sudo ./build.sh
 	```
 
-2. Save your own ```.key``` and ```.crt``` files in ```certs/```
-3. Build container and then manage it as root
+2. Save SSL certs in the same directory
 
 	```bash
-	$ sudo ./build.sh
+	$ mkdir -p certs
+	$ cp {file.key,file.crt} certs/
+	```
 
+## Usage
+1. Create container and manage it as root
+
+	```bash
 	$ sudo ./manage.py -h
 	usage: manage.py [-h] [-p PROXY_PORT] [--radius_server RADIUS_SERVER]
 				 [--radius_secret RADIUS_SECRET] [--ncsa_users NCSA_USERS]
@@ -28,7 +39,7 @@
 	$ sudo ./manage.py create -p 1234 --ncsa_users user1:pwd1,user2:pwd2
 	```
 
-4. Using a Secure Web Proxy with Chrome by three optional ways
+2. Using a Secure Web Proxy with Chrome by three optional ways
 	1. add command-line argument ```--proxy-server=https://<your.proxy.domain>:<proxy_port>```
 	2. proxy auto-config (PAC) file
 
