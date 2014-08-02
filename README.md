@@ -1,23 +1,23 @@
 ## Requirement
-+ Docker 1.0 & base-image ubuntu:trusty
++ Docker 1.0
 + A domain and an SSL certificate signed by a trusted CA, (e.g. [StartSSL.com](https://www.startssl.com))
 + Google Chrome
 
 ## Installation
-1. Build image
+1. Build image (as root)
 
 	```bash
-	$ sudo docker pull catatnight/secureproxy
+	$ docker pull catatnight/secureproxy
 	$ curl https://raw.githubusercontent.com/catatnight/docker-secureproxy/master/manage.py -o manage.py
 	$ chmod +x manage.py
 
 	# OR build on localhost
 	$ git clone https://github.com/catatnight/docker-secureproxy.git
 	$ cd docker-secureproxy
-	$ sudo ./build.sh
+	$ ./build.sh
 	```
 
-2. Save SSL certs in the same directory
+2. Save SSL certs (same directory as where ```manage.py``` is)
 
 	```bash
 	$ mkdir -p certs
@@ -25,18 +25,18 @@
 	```
 
 ## Usage
-1. Create container and manage it as root
+1. Create container and manage it (as root)
 
 	```bash
-	$ sudo ./manage.py -h
+	$ ./manage.py -h
 	usage: manage.py [-h] [-p PROXY_PORT] [--radius_server RADIUS_SERVER]
 				 [--radius_secret RADIUS_SECRET] [--ncsa_users NCSA_USERS]
 				 {create,start,stop,restart,delete}
 	# proxy authentication methods
 	# 1) Uses a RADIUS server for login validation
-	$ sudo ./manage.py create -p 1234 --radius_server radius.example.com --radius_secret radpass
+	$ ./manage.py create -p 1234 --radius_server 6.7.8.9 --radius_secret radpass
 	# 2) Uses an NCSA-style username and password file
-	$ sudo ./manage.py create -p 1234 --ncsa_users user1:pwd1,user2:pwd2
+	$ ./manage.py create -p 1234 --ncsa_users user1:pwd1,user2:pwd2
 	```
 
 2. Using a Secure Web Proxy with Chrome by three optional ways
