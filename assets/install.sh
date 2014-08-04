@@ -61,6 +61,7 @@ half_closed_clients off
 #logfile
 logfile_rotate 4
 .
+w
 EOF
 if [[ -z "$ncsa_users" ]]; then
 	sed -i "s/^\(auth_param basic program\)/\1 \/usr\/lib\/squid3\/basic_radius_auth -h $radius_server -p 1812 -w $radius_radpass/" /etc/squid3/squid.conf
