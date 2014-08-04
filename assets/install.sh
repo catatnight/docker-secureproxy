@@ -1,5 +1,10 @@
 #!/bin/bash
 
+#judgement
+if [[ -a /etc/supervisor/conf.d/supervisord.conf ]]; then
+	exit 0
+fi
+
 #supervisor
 cat > /etc/supervisor/conf.d/supervisord.conf <<EOF
 [supervisord]
@@ -28,46 +33,40 @@ workers=1
 EOF
 
 #squid3
-if [[ -z $(cat /etc/squid3/squid.conf | grep buddy) ]]; then
-	ed -s /etc/squid3/squid.conf <<-EOF
-	0a
-	#authentication
-	auth_param basic program
-	auth_param basic children 5
-	auth_param basic realm Hi, buddy! How are you today?
-	auth_param basic credentialsttl 6 hours
-	acl auth_user proxy_auth REQUIRED
-	http_access allow auth_user
-	#privacy
-	via off
-	forwarded_for delete
-	#follow_x_forwarded_for deny all
-	request_header_access From deny all
-	request_header_access Referer deny all
-	request_header_access Server deny all
-	#request_header_access User-Agent deny all
-	request_header_access WWW-Authenticate deny all
-	request_header_access Link deny all
-	#cache
-	cache deny all
-	cache_mem 0
-	cache_store_log none
-	negative_ttl 0 minutes
-	half_closed_clients off
-	#logfile
-	logfile_rotate 4
-	.
-	w
-	EOF
-fi
+ed -s /etc/squid3/squid.conf <<EOF
+0a
+#authentication
+auth_param basic program
+auth_param basic children 5
+auth_param basic realm Hi, buddy! How are you today?
+auth_param basic credentialsttl 6 hours
+acl auth_user proxy_auth REQUIRED
+http_access allow auth_user
+#privacy
+via off
+forwarded_for delete
+#follow_x_forwarded_for deny all
+request_header_access From deny all
+request_header_access Referer deny all
+request_header_access Server deny all
+#request_header_access User-Agent deny all
+request_header_access WWW-Authenticate deny all
+request_header_access Link deny all
+#cache
+cache deny all
+cache_mem 0
+cache_store_log none
+negative_ttl 0 minutes
+half_closed_clients off
+#logfile
+logfile_rotate 4
+.
+EOF
 if [[ -z "$ncsa_users" ]]; then
 	sed -i "s/^\(auth_param basic program\)/\1 \/usr\/lib\/squid3\/basic_radius_auth -h $radius_server -p 1812 -w $radius_radpass/" /etc/squid3/squid.conf
-	if [[ -z "$(cat /etc/crontab | grep squid2radius)" ]]; then
-		cat >> /etc/crontab <<-EOF
-		MAILTO=""
-		0 0 * * * root python /opt/squid2radius/squid2radius.py --squid-path /usr/sbin/squid3 /var/log/squid3/access.log $radius_server $radius_radpass > /dev/null 2>&1
-		EOF
-	fi
+	cat >> /etc/crontab <<-EOF
+	0 0 * * * root python /opt/squid2radius/squid2radius.py --squid-path /usr/sbin/squid3 /var/log/squid3/access.log $radius_server $radius_radpass > /dev/null 2>&1
+	EOF
 else
 	> /etc/squid3/passwd
 	echo $ncsa_users | tr , \\n > /tmp/passwd
