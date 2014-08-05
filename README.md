@@ -56,5 +56,5 @@
 + [tatsuhiro-t / nghttp2](https://github.com/tatsuhiro-t/nghttp2)
 + [jiehanzheng / squid2radius](https://github.com/jiehanzheng/squid2radius)
 + [tatsuhiro-t / spdylay](https://github.com/tatsuhiro-t/spdylay)
-+ [搭建 Spdy SSL Proxy (二) - 洋白菜的博客](http://blog.chaiyalin.com/2013/07/spdy-ssl-proxy-2.html)
++ [搭建 Spdy SSL Proxy (二) - 洋白菜的博客 (Google's cached page)](http://webcache.googleusercontent.com/search?q=cache:yuB91alsIp4J:blog.chaiyalin.com/2013/07/spdy-ssl-proxy-2.html+&cd=1&hl=zh-CN&ct=clnk&gl=us)
 + TBD

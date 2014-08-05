@@ -13,7 +13,7 @@ def fetch_version(url, app):
 		a_file.write(version.group(0))
 
 fetch_version('http://github.com/tatsuhiro-t/nghttp2/releases', 'nghttp2')
-fetch_version('http://github.com/tatsuhiro-t/spdylay/releases', 'shrpx')
+fetch_version('http://github.com/tatsuhiro-t/spdylay/releases', 'spdylay')
 EOF
 
 nghttp2_v=`cat /nghttp2`
@@ -27,13 +27,13 @@ if [[ ! -f /tmp/nghttp2.deb || "$(dpkg-deb --field /tmp/nghttp2.deb version)" !=
 	cp /nghttp2-$nghttp2_v/nghttp2_$nghttp2_v-1_amd64.deb /tmp/nghttp2.deb
 fi
 
-shrpx_v=`cat /shrpx`
-if [[ ! -f /tmp/spdylay.deb || "$(dpkg-deb --field /tmp/spdylay.deb version)" != "$shrpx_v-1" ]]; then
+spdylay_v=`cat /spdylay`
+if [[ ! -f /tmp/spdylay.deb || "$(dpkg-deb --field /tmp/spdylay.deb version)" != "$spdylay_v-1" ]]; then
 	apt-get update
-	apt-get -y install wget build-essential checkinstall autoconf automake autotools-dev libtool pkg-config zlib1g-dev libcunit1-dev libssl-dev libxml2-dev libevent-dev 
-	cd / && wget --no-check-certificate https://github.com/tatsuhiro-t/spdylay/releases/download/v$shrpx_v/spdylay-$shrpx_v.tar.gz
-	tar -zxvf spdylay-$shrpx_v.tar.gz && cd spdylay-$shrpx_v/
+	apt-get -y install wget build-essential checkinstall autoconf automake autotools-dev libtool pkg-config zlib1g-dev libcunit1-dev libssl-dev libxml2-dev libevent-dev
+	cd / && wget --no-check-certificate https://github.com/tatsuhiro-t/spdylay/releases/download/v$spdylay_v/spdylay-$spdylay_v.tar.gz
+	tar -zxvf spdylay-$spdylay_v.tar.gz && cd spdylay-$spdylay_v/
 	autoreconf -i && automake && autoconf && ./configure && make
 	checkinstall -y --requires="libevent-openssl-2.0-5, libevent-2.0-5" --install=no --maintainer=tatsuhiro-t
-	cp /spdylay-$shrpx_v/spdylay_$shrpx_v-1_amd64.deb /tmp/spdylay.deb
+	cp /spdylay-$spdylay_v/spdylay_$spdylay_v-1_amd64.deb /tmp/spdylay.deb
 fi
