@@ -29,7 +29,7 @@ cmd_dict = {\
 		"docker run --net=host --name {0} -e proxy_port={1} "\
 		"-e radius_server={2} -e radius_radpass={3} -e ncsa_users={4} "\
 		"-e time_zone=Asia/Shanghai -v {5}/certs:/opt/certs -d catatnight/{0}"\
-		.format(app_name, args.proxy_port, args.radius_server, args.radius_secret, args.ncsa_users, os.getcwd()), \
+		.format(app_name, args.proxy_port, args.radius_server, args.radius_secret, args.ncsa_users, os.path.dirname(os.path.realpath(__file__))), \
 	"start"  : "docker start   %s" % app_name, \
 	"stop"   : "docker stop    %s" % app_name, \
 	"restart": "docker restart %s" % app_name, \
