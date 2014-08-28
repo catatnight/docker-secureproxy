@@ -21,19 +21,24 @@
 
 ## Usage
 1. Create container and manage it (as root)
+	+ Uses a RADIUS server for login validation
 
-	```bash
-	$ ./manage.py -h
-	usage: manage.py [-h] [-p PROXY_PORT] [--radius_server RADIUS_SERVER]
+		```bash
+		$ ./manage.py create -p 1234 --radius_server 6.7.8.9 --radius_secret radpass
+		```
+	+ Uses an NCSA-style username and password file
+
+		```bash
+		$ ./manage.py create -p 1234 --ncsa_users user1:pwd1,user2:pwd2
+		```
+	+ General usage
+
+		```bash
+		$ ./manage.py -h
+		usage: manage.py [-h] [-p PROXY_PORT] [--radius_server RADIUS_SERVER]
 				 [--radius_secret RADIUS_SECRET] [--ncsa_users NCSA_USERS]
 				 {create,start,stop,restart,delete}
-	# proxy authentication methods
-	# 1) Uses a RADIUS server for login validation
-	$ ./manage.py create -p 1234 --radius_server 6.7.8.9 --radius_secret radpass
-	# 2) Uses an NCSA-style username and password file
-	$ ./manage.py create -p 1234 --ncsa_users user1:pwd1,user2:pwd2
-	```
-
+		```
 2. Using a Secure Web Proxy with Chrome by three optional ways
 	1. add command-line argument ```--proxy-server=https://<your.proxy.domain>:<proxy_port>```
 	2. proxy auto-config (PAC) file
