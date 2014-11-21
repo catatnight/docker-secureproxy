@@ -10,8 +10,8 @@ cat > /etc/supervisor/conf.d/supervisord.conf <<EOF
 [supervisord]
 nodaemon=true
 
-[program:nghttpx]
-command=/usr/local/bin/nghttpx
+[program:frontend]
+command=/usr/local/bin/shrpx
 
 [program:squid3]
 command=/usr/sbin/squid3 -N
@@ -20,14 +20,14 @@ command=/usr/sbin/squid3 -N
 command=/usr/sbin/cron -f
 EOF
 
-#nghttpx
-mkdir /etc/nghttpx
-cat > /etc/nghttpx/nghttpx.conf <<EOF
+#frontend
+mkdir /etc/shrpx
+cat > /etc/shrpx/shrpx.conf <<EOF
 frontend=0.0.0.0,$proxy_port
 backend=127.0.0.1,3128
 private-key-file=$(find /opt/certs -iname *.key)
 certificate-file=$(find /opt/certs -iname *.crt)
-http2-proxy=yes
+spdy-proxy=yes
 daemon=no
 workers=1
 EOF
