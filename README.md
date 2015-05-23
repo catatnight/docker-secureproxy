@@ -48,7 +48,7 @@
 			return "HTTPS <your.proxy.domain>:<proxy_port>";
 		}
 		```
-	3. chrome extension [falcon proxy](https://chrome.google.com/webstore/detail/falcon-proxy/gchhimlnjdafdlkojbffdkogjhhkdepf)
+	3. chrome extension [SwitchyOmega](https://chrome.google.com/webstore/detail/proxy-switchyomega/padekgcemlokbadohgkifijomclgjgif)|[falcon proxy](https://chrome.google.com/webstore/detail/falcon-proxy/gchhimlnjdafdlkojbffdkogjhhkdepf)
 
 
 ## Note
