@@ -19,7 +19,7 @@ EOF
 nghttp2_v=`cat /nghttp2`
 if [[ ! -f /tmp/nghttp2.deb || "$(dpkg-deb --field /tmp/nghttp2.deb version)" != "$nghttp2_v-1" ]]; then
 	apt-get update
-	apt-get -y install wget build-essential checkinstall autoconf automake autotools-dev libtool pkg-config zlib1g-dev libcunit1-dev libssl-dev libxml2-dev libev-dev libevent-dev libjansson-dev libjemalloc-dev cython python3.4-dev
+	apt-get -y install wget build-essential checkinstall autoconf automake autotools-dev libtool pkg-config zlib1g-dev libcunit1-dev libssl-dev libxml2-dev libev-dev libevent-dev libjansson-dev libjemalloc-dev cython python3.4-dev python-setuptools
 	spdylay_v=`cat /spdylay`
 	cd / && wget --no-check-certificate https://github.com/tatsuhiro-t/spdylay/releases/download/v$spdylay_v/spdylay-$spdylay_v.tar.gz
 	tar -zxvf spdylay-$spdylay_v.tar.gz && cd spdylay-$spdylay_v/
